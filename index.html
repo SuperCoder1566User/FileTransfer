@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='design.css') }}">
+    <script src="{{ url_for('static', filename='design.js') }}" defer></script>
+</head>
+<body>
+    <h1>File Management</h1>
+
+    <!-- Centered Delete Button -->
+    <div style="text-align: center; margin-bottom: 20px;">
+        <button id="delete-all-button" class="button">Delete Selected Files</button>
+    </div>
+
+    <!-- File Upload Form -->
+    <form action="/upload" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+        <div class="file-upload-container">
+            <div class="file-upload-wrapper">
+                <label for="file-upload" class="file-upload-button">Choose File</label>
+                <input type="file" id="file-upload" name="file" class="file-upload" onchange="updateFileName()">
+            </div>
+            <button type="submit" class="button upload-button">Upload</button>
+        </div>
+        <p id="file-name">No file chosen</p>
+    </form>
+
+    <!-- File List -->
+    <ul id="file-list">
+        {% for file in files %}
+        <li>
+            <input type="checkbox" name="files-to-delete" value="{{ file }}">
+            <span>{{ file }}</span>
+            <div>
+                <a href="{{ url_for('download_file', filename=file) }}" class="button">Download</a>
+                <a href="{{ url_for('preview_file', filename=file) }}" class="button preview-button">Preview</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Notification Messages -->
+    <div class="notification">No file chosen</div>
+    <div class="delete-notification">File(s) have been deleted</div>
+
+    <!-- Delete Form (hidden) -->
+    <form id="delete-form" action="/delete" method="post">
+        <input type="hidden" id="filenames-to-delete" name="filenames">
+    </form>
+</body>
+</html>
