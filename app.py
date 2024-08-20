@@ -1,10 +1,11 @@
 from flask import Flask, request, redirect, url_for, render_template, send_from_directory, abort
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='.', template_folder='.')
+
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['MAX_CONTENT_LENGTH'] = 54 * 1024 * 1024  # 16 MB limit
-ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'gif', 'pdf', 'txt', 'csv', 'exe', 'ico', 'ipa', 'mov', 'mp4', 'apk'}  # Allowed file types
+ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'gif', 'pdf', 'txt', 'csv', 'exe', 'ico' , 'ipa', 'mov', 'mp4' , 'apk' }  # Allowed file types
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -43,7 +44,7 @@ def preview_file(filename):
         abort(404)
     
     # Check file extension to serve previewable files
-    previewable_extensions = {'jpg', 'jpeg', 'png', 'gif', 'pdf', 'mov', 'mp4', 'docx', 'ico', 'txt'}
+    previewable_extensions = {'jpg', 'jpeg', 'png', 'gif', 'pdf', 'mov', 'mp4', 'docx' , 'ico' , 'txt' , 'pdf' }
     file_extension = filename.rsplit('.', 1)[1].lower()
     
     if file_extension in previewable_extensions:
@@ -53,18 +54,19 @@ def preview_file(filename):
 
 @app.route('/delete', methods=['POST'])
 def delete_file():
-    filenames = request.form.get('filenames', '').split(',')
-    errors = []
-    for filename in filenames:
-        try:
-            os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        except FileNotFoundError:
-            errors.append(filename) 
-    
-    if errors:                                                                            
-        return f"Files not found: {', '.join(errors)}", 404
-    
-    return redirect('/')
+    filename = request.form.get('filename')
+    try:
+        os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return redirect('/')
+    except FileNotFoundError:
+        return "File not found", 404
+
+# Serve static files from the same directory
+@app.route('/<path:filename>')
+def serve_static(filename):
+    if os.path.isfile(filename):
+        return send_from_directory('.', filename)
+    abort(404)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
