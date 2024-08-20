@@ -1,0 +1,183 @@
+/* General Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Title Styles */
+h1 {
+    color: #007BFF;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Centered Delete Button */
+#delete-all-button {
+    display: inline-block;
+    background: #15d798;
+    border: none;
+    border-radius: 11px;
+    color: #ffffff;
+    padding: 20px 45px;
+    font: normal bold 26px/1 "Open Sans", sans-serif;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+/* File Upload Container */
+.file-upload-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* File Input Wrapper */
+.file-upload-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+/* File Input */
+.file-upload {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+/* Custom File Upload Button */
+.file-upload-button {
+    display: inline-block;
+    background: #15d798;
+    border-radius: 11px;
+    padding: 20px 45px;
+    color: #ffffff;
+    font: normal bold 26px/1 "Open Sans", sans-serif;
+    text-align: center;
+    cursor: pointer;
+    margin: 0;
+}
+
+/* Upload Button Style */
+.upload-button {
+    display: inline-block;
+    background: #15d798;
+    border-radius: 11px;
+    padding: 20px 45px;
+    color: #ffffff;
+    font: normal bold 26px/1 "Open Sans", sans-serif;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* File Name Display */
+#file-name {
+    display: block;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+/* File List Styles */
+#file-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#file-list li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Polished Checkbox */
+#file-list li input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #15d798;
+    border-radius: 5px;
+    background: #fff;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+}
+
+#file-list li input[type="checkbox"]:checked::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 7px;
+    width: 6px;
+    height: 10px;
+    border: solid #15d798;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Button Styles */
+.button {
+    display: inline-block;
+    background: #15d798;
+    border-radius: 11px;
+    padding: 10px 20px;
+    color: #ffffff;
+    font: normal bold 16px/1 "Open Sans", sans-serif;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.button:hover {
+    background: #13c9a6;
+}
+
+/* Preview Button Style */
+.preview-button {
+    background: #007BFF;
+}
+
+.preview-button:hover {
+    background: #0056b3;
+}
+
+/* Notification Styles */
+.notification {
+    display: none;
+    background-color: #ededed;
+    color: #1f1f1f;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    text-align: center;
+    width: 300px;
+}
+
+.delete-notification {
+    display: none;
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    transition: opacity 1s ease-out;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+}
